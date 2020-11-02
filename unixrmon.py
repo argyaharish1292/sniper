@@ -102,7 +102,7 @@ def toSQL(devip,devint):
         #the custom/temporary dataframe
         df2 = df[["stamp","neip","neint","tx","rx","rxdrops","crc","unknownvid","qdrops"]]
         #connecting to MySQL database
-        engine = db.create_engine('mysql+pymysql://admin:admin2019@10.35.105.55:3306/sniff')
+        engine = db.create_engine('mysql+pymysql://userr:pass@hostname:3306/db')
         #exporting dataframe to sql
         df2.to_sql(name='rmon', con=engine, if_exists='append', index=False)
     except IOError:
@@ -206,7 +206,7 @@ def toSQLday(devip,devint,deltaday):
         #the custom/temporary dataframe
         df2 = df[["stamp","neip","neint","tx","rx","rxdrops","crc","unknownvid","qdrops"]]
         #connecting to MySQL database
-        engine = db.create_engine('mysql+pymysql://admin:admin2019@10.35.105.55:3306/sniff')
+        engine = db.create_engine('mysql+pymysql://user:password@hostname:3306/db')
         #exporting dataframe to sql
         df2.to_sql(name='rmon', con=engine, if_exists='append', index=False)
     except IOError:
