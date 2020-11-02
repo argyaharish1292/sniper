@@ -15,7 +15,7 @@ def createphp(devip,devint):
                     $end_week = strtotime("today");
                     $start_week = date("Y-m-d",$start_week);
                     $end_week = date("Y-m-d",$end_week);
-                    $connectsql = mysqli_connect("localhost", "root", "root", "sniff");  
+                    $connectsql = mysqli_connect("localhost", "user", "pass", "db");  
                     $query ="SELECT DISTINCT * FROM rmon, pdhnec, mapping 
                     WHERE rmon.neip=pdhnec.neip AND rmon.neint=mapping.interfaceid 
                     AND mapping.interface=pdhnec.neint AND mapping.device=pdhnec.nedev 
