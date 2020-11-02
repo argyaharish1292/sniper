@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet Quick Start Guide Example</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="leaflet/leaflet.css" />
+	<script src="leaflet/leaflet.js"></script>
+	<script src="support/JQuery-1.11.1.min.js"></script>
+	<script src="../dist/leaflet.conditionalLayer.js"></script>
+</head>
+<body>
+	<div id="map" style="top:0px; bottom:0px; left:0px; right:0px; position:absolute;"></div>
+
+	<script>
+		
+
+		var map = L.map('map', {worldCopyJump:false, maxBounds: [[45, -180],[-45, 180]], minZoom:3, noWarp:true}).setView([0, 0], 8);
+		L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
+			type: 'map',
+			ext: 'jpg',
+			attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+			subdomains: '1234',
+			detectRetina: true,
+			reuseTiles: true
+		}).addTo(map);
+
+
+		var conditionalLayer = L.conditionalMarkers([], {maxMarkers: 300});
+		var layerControl = L.control.layers([], {"Circles" :conditionalLayer}).addTo(map);
+		var url = "support/listOfCircles.json"
+        $.ajax({
+            dataType: "json",
+            url: url,
+            success: function(data) {
+                for(var marker = 0;marker< data.length; marker++) {
+                    conditionalLayer.addLayer(
+                    	L.circle([data[marker].posz*90-45, 
+                    		data[marker].posy*360-180], 
+                    		data[marker].radius*10e5, 
+                    		{
+    							color: 'green', 
+    							fill:null
+							}
+						)
+					);
+                }
+                conditionalLayer.addTo(map);
+            }
+        });
+	</script>
+</body>
+</html>
