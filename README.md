@@ -17,10 +17,11 @@ Leaflet
 select2
 DataTables
 
-
 Python Libraries :
 pymysql
 sqlalchemy
 pyneo4j
 pandas
 numpy
+
+Python are used for automatic data collection from the network using scheduled jobs/programs hosted on the VM, it uses ftp to connect to each equipment's IP address and get the appropriate files to be export into an SQL database.
